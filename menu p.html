@@ -1,0 +1,435 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>King's Pizza</title>
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
+    <meta content="" name="keywords">
+    <meta content="" name="description">
+
+    <!-- Favicon -->
+    <link href="img/favicon.ico" rel="icon">
+
+    <!-- Google Web Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Heebo:wght@400;500;600&family=Nunito:wght@600;700;800&family=Pacifico&display=swap" rel="stylesheet">
+
+    <!-- Icon Font Stylesheet -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.0/css/all.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.4.1/font/bootstrap-icons.css" rel="stylesheet">
+
+    <!-- Libraries Stylesheet -->
+    <link href="lib/animate/animate.min.css" rel="stylesheet">
+    <link href="lib/owlcarousel/assets/owl.carousel.min.css" rel="stylesheet">
+    <link href="lib/tempusdominus/css/tempusdominus-bootstrap-4.min.css" rel="stylesheet" />
+
+    <!-- Customized Bootstrap Stylesheet -->
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Template Stylesheet -->
+    <link href="css/style.css" rel="stylesheet">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f4;
+        }
+
+
+        .menu-container {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-around;
+            padding: 20px;
+        }
+
+        .product-card {
+            border: 1px solid #ddd;
+            margin: 10px;
+            padding: 10px;
+            background-color: white;
+            text-align: center;
+            flex: 1 1 calc(25% - 20px);
+            max-width: calc(25% - 20px);
+        }
+
+        .cart-icon {
+            position: fixed;
+            top: 10px;
+            right: 10px;
+            cursor: pointer;
+            background-color: #333;
+            color: red;
+            padding: 8px;
+            border-radius: 50%;
+        }
+
+        #cart-popup {
+            display: none;
+            position: fixed;
+            top: 10px;
+            right: 10px;
+            background-color: #fff;
+            border: 1px solid #ddd;
+            padding: 10px;
+            z-index: 1;
+            max-height: ; /* Set the max height as needed */
+            overflow-y: auto;
+        }
+
+        #cart-popup ul {
+            list-style-type: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        #cart-popup li {
+            border-bottom: 1px solid #ddd;
+            padding: 10px;
+            display: flex;
+            justify-content: space-between;
+        }
+
+        #cart-popup button {
+            background-color: #4CAF50;
+            color: white;
+            padding: 5px 10px;
+            border: none;
+            cursor: pointer;
+        }
+
+        #total-price {
+            font-weight: bold;
+        }
+
+        .payment-button {
+            padding: 10px;
+            background-color: #4CAF50;
+            color: white;
+            cursor: pointer;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container-xxl bg-white p-0">
+        <!-- Spinner Start -->
+        <div id="spinner" class="show bg-white position-fixed translate-middle w-100 vh-100 top-50 start-50 d-flex align-items-center justify-content-center">
+            <div class="spinner-border text-primary" style="width: 3rem; height: 3rem;" role="status">
+                <span class="sr-only">Loading...</span>
+            </div>
+        </div>
+        <!-- Spinner End -->
+
+
+        <!-- Navbar & Hero Start -->
+        <div class="container-xxl position-relative p-0">
+            <nav class="navbar navbar-expand-lg navbar-dark bg-dark px-4 px-lg-5 py-3 py-lg-0">
+                <a href="" class="navbar-brand p-0">
+                    <img src="img/logo1.png" alt="Logo"> 
+                </a>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse">
+                    <span class="fa fa-bars"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarCollapse">
+                    <div class="navbar-nav ms-auto py-0 pe-4">
+                        <a href="index.html" class="nav-item nav-link ">Home</a>
+                        <a href="about.html" class="nav-item nav-link">About</a>
+                        <a href="menu.html" class="nav-item nav-link active">Menu</a>
+                        <a href="testimonial.html" class="nav-item nav-link">Testimonial</a>
+                        <a href="contact.html" class="nav-item nav-link">Contact</a>
+                        <a href="login.html" class="nav-item nav-link">Login/SignUp</a>
+                        </div>
+                        
+            </nav>
+
+            <div class="container-xxl py-5 bg-dark hero-header mb-5">
+                <div class="container text-center my-5 pt-5 pb-4">
+                    <h1 class="display-3 text-white mb-3 animated slideInDown">Menu</h1>
+                </div>
+            </div>
+        </div>
+        <!-- Navbar & Hero End -->
+
+        <div class="container-xxl py-5">
+            <div class="container">
+                <div class="text-center wow fadeInUp" data-wow-delay="0.1s">
+                    <h5 class="section-title ff-secondary text-center text-primary fw-normal">Our Menu</h5>
+                    <h1 class="mb-5">Most Popular Items</h1>
+                </div>
+
+<!-- Menu Starts -->
+    <div class="menu-container">
+        <!-- Product 1 -->
+        <div class="product-card">
+            <img src="img/Chicken Mushroom.png" style="width: 200px;" alt="">
+            <h5>Chicken Mashroom</h5>
+            <p>RM 10</p>
+            <button onclick="addToCart('Chicken Mashroom', 10)">Add to Cart</button>
+        </div>
+
+        <!-- Product 2 -->
+        <div class="product-card">
+            <img src="img/BBQ Chicken.png" style="width: 200px;" alt="">
+            <h5>BBQ Chicken</h5>
+            <p>RM 11</p>
+            <button onclick="addToCart('BBQ Chicken', 11)">Add to Cart</button>
+        </div>
+
+        <!-- Product 3 -->
+        <div class="product-card">
+            <img src="img/Chicken Satay.png" style="width: 200px;" alt="">
+            <h5>Chicken Satay</h5>
+            <p>RM 10</p>
+            <button onclick="addToCart('Chicken Satay', 10)">Add to Cart</button>
+        </div>
+
+        <!-- Product 4 -->
+        <div class="product-card">
+            <img src="img/Pepperoni.png" style="width: 200px;" alt="">
+            <h5>Pepperoni</h5>
+            <p>RM 12</p>
+            <button onclick="addToCart('Pepperoni', 12)">Add to Cart</button>
+        </div>
+
+        <!-- Product 5 -->
+        <div class="product-card">
+            <img src="img/Beef Truffle.png" style="width: 200px;" alt="">
+            <h5>Beef Truffle</h5>
+            <p>RM 12</p>
+            <button onclick="addToCart('Beef Truffle', 12)">Add to Cart</button>
+        </div>
+
+        <!-- Product 6 -->
+        <div class="product-card">
+            <img src="img/Cheese Pepperoni.png" style="width: 200px;" alt="">
+            <h5>Cheese Pepperoni</h5>
+            <p>RM 9</p>
+            <button onclick="addToCart('Cheese Pepperoni', 9)">Add to Cart</button>
+        </div>
+
+        <!-- Product 7 -->
+        <div class="product-card">
+            <img src="img/Hawaiian.png" style="width: 200px;" alt="">
+            <h5>Hawaiian</h5>
+            <p>RM 10</p>
+            <button onclick="addToCart('Hawaiian', 10)">Add to Cart</button>
+        </div>
+
+        <!-- Product 8 -->
+        <div class="product-card">
+            <img src="img/Italiano.png" style="width: 200px;" alt="">
+            <h5>Italiano</h5>
+            <p>RM 14</p>
+            <button onclick="addToCart('Italiano', 14)">Add to Cart</button>
+        </div>
+
+        <!-- Product 9 -->
+        <div class="product-card">
+            <img src="img/Lamb.png" style="width: 200px;" alt="">
+            <h5>Lamb</h5>
+            <p>RM 12</p>
+            <button onclick="addToCart('Lamb', 12)">Add to Cart</button>
+        </div>
+
+        <!-- Product 10 -->
+        <div class="product-card">
+            <img src="img/Margherita.png" style="width: 200px;" alt="">
+            <h5>Margherita</h5>
+            <p>RM 11</p>
+            <button onclick="addToCart('Margherita', 11)">Add to Cart</button>
+        </div>
+
+        <!-- Product 11 -->
+        <div class="product-card">
+            <img src="img/Maxicano.png" style="width: 200px;" alt="">
+            <h5>Maxicano</h5>
+            <p>RM 13</p>
+            <button onclick="addToCart('Maxicano', 13)">Add to Cart</button>
+        </div>
+
+        <!-- Product 12 -->
+        <div class="product-card">
+            <img src="img/Mediterranean Lamb.png" style="width: 200px;" alt="">
+            <h5>Mediterranean Lamb</h5>
+            <p>RM 15</p>
+            <button onclick="addToCart('Mediterranean Lamb', 15)">Add to Cart</button>
+        </div>
+
+
+    </div>
+
+    <div class="cart-icon" onclick="toggleCart()">🛒 <span id="cart-total">0</span></div>
+
+    <div id="cart-popup">
+        <h3>Your Cart</h3>
+        <ul id="cart-list"></ul>
+        <div id="total-price">Total: $0</div>
+        <button class="payment-button" onclick="redirectToPayment()">Make Payment</button>
+    </div>
+
+    <script>
+        let cart = [];
+        let isCartOpen = false;
+
+        function toggleCart() {
+            isCartOpen = !isCartOpen;
+            const cartPopup = document.getElementById('cart-popup');
+            cartPopup.style.display = isCartOpen ? 'block' : 'none';
+            updateCartPopup();
+        }
+
+        function addToCart(product, price) {
+            const existingItem = cart.find(item => item.product === product);
+
+            if (existingItem) {
+                existingItem.quantity += 1;
+            } else {
+                const newItem = { product, price, quantity: 1 };
+                cart.push(newItem);
+            }
+
+            updateCartPopup();
+        }
+
+        function updateCartPopup() {
+            const cartList = document.getElementById('cart-list');
+            const totalPriceElement = document.getElementById('total-price');
+            let totalPrice = 0;
+
+            cartList.innerHTML = '';
+
+            cart.forEach(item => {
+                const listItem = document.createElement('li');
+                listItem.innerHTML = `
+                    <span>${item.product} x ${item.quantity}</span>
+                    <span>$${item.price * item.quantity}</span>
+                    <button onclick="increaseQuantity('${item.product}')">+</button>
+                    <button onclick="decreaseQuantity('${item.product}')">-</button>
+                    <button onclick="removeItem('${item.product}')">Remove</button>
+                `;
+                cartList.appendChild(listItem);
+
+                totalPrice += item.price * item.quantity;
+            });
+
+            totalPriceElement.textContent = `Total: $${totalPrice}`;
+            document.getElementById('cart-total').textContent = cart.reduce((total, item) => total + item.quantity, 0);
+        }
+
+        function redirectToPayment() {
+        // Calculate total amount from the cart
+        const totalAmount = cart.reduce((total, item) => total + item.price * item.quantity, 0);
+
+        // Redirect to the payment page with the total amount as a query parameter
+        window.location.href = `payment.html?total=${totalAmount}`;
+    }
+
+        function increaseQuantity(product) {
+            const item = cart.find(item => item.product === product);
+            if (item) {
+                item.quantity += 1;
+                updateCartPopup();
+            }
+        }
+
+        function decreaseQuantity(product) {
+            const item = cart.find(item => item.product === product);
+            if (item && item.quantity > 1) {
+                item.quantity -= 1;
+                updateCartPopup();
+            }
+        }
+
+        function removeItem(product) {
+            cart = cart.filter(item => item.product !== product);
+            updateCartPopup();
+        }
+
+        function redirectToPayment() {
+            // Redirect to the payment page
+            window.location.href = 'payment.html';
+        }
+    </script>
+
+     <!-- Footer Start -->
+     <div class="container-fluid bg-dark text-light footer pt-5 mt-5 wow fadeIn" data-wow-delay="0.1s">
+        <div class="container py-5">
+            <div class="row g-5">
+                <div class="col-lg-3 col-md-6">
+                    <h4 class="section-title ff-secondary text-start text-primary fw-normal mb-4">Company</h4>
+                    <a href="about.html" class="btn btn-link" href="">About Us</a>
+                    <a href="contact.html" class="btn btn-link" href="">Contact Us</a>
+                    <a href="menu.html" class="btn btn-link" href="">Menu</a>
+                    <a class="btn btn-link" href="">Privacy Policy</a>
+                    <a class="btn btn-link" href="">Terms & Condition</a>
+                </div>
+                <div class="col-lg-3 col-md-6">
+                    <h4 class="section-title ff-secondary text-start text-primary fw-normal mb-4">Contact</h4>
+                    <p class="mb-2"><i class="fa fa-map-marker-alt me-3"></i>Mahallah Faruq, UIA, Gomabak, 53100, Selangor, Malaysia</p>
+                    <p class="mb-2"><i class="fa fa-phone-alt me-3"></i>+60 xxxxxxxx</p>
+                    <p class="mb-2"><i class="fa fa-envelope me-3"></i>info@KingsPizza.com</p>
+                    <div class="d-flex pt-2">
+                        <a class="btn btn-outline-light btn-social" href="https://twitter.com/chedetofficial/status/1720820366661259648?t=J498jVIPQmZS2DKNNmf32g&s=19.com/"><i class="fab fa-twitter"></i></a>
+                        <a class="btn btn-outline-light btn-social" href="https://facebook.com/"><i class="fab fa-facebook-f"></i></a>
+                        <a class="btn btn-outline-light btn-social" href="https://youtube.com/"><i class="fab fa-youtube"></i></a>
+                        <a class="btn btn-outline-light btn-social" href="https://www.linkedin.com/"><i class="fab fa-linkedin-in"></i></a>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-md-6">
+                    <h4 class="section-title ff-secondary text-start text-primary fw-normal mb-4">Opening</h4>
+                    <h5 class="text-light fw-normal">Monday - Saturday</h5>
+                    <p>10AM - 10PM</p>
+                    <h5 class="text-light fw-normal">Friday</h5>
+                    <p>10AM - 12PM</p>
+                    <p>2.30PM - 10PM</p>
+                </div>
+                <div class="col-lg-3 col-md-6">
+                    <h4 class="section-title ff-secondary text-start text-primary fw-normal mb-4">Subscribe</h4>
+                    <p>Subscribe Us</p>
+                    <div class="position-relative mx-auto" style="max-width: 400px;">
+                        <input class="form-control border-primary w-100 py-3 ps-4 pe-5" type="text" placeholder="Your email">
+                        <button type="button" class="btn btn-primary py-2 position-absolute top-0 end-0 mt-2 me-2">SignUp</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="container">
+            <div class="copyright">
+                <div class="row">
+                    <div class="col-md-6 text-center text-md-start mb-3 mb-md-0">
+                        &copy; <a class="border-bottom" href="index.html">King's Pizza</a>, All Right Reserved. 
+                        
+                        
+                        Designed By <a class="border-bottom" href="">Group: Al-Nujum</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <br>
+    </div>
+    <!-- Footer End -->
+
+
+    <!-- Back to Top -->
+    <a href="#" class="btn btn-lg btn-primary btn-lg-square back-to-top"><i class="bi bi-arrow-up"></i></a>
+</div>
+
+<!-- JavaScript Libraries -->
+<script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/js/bootstrap.bundle.min.js"></script>
+<script src="lib/wow/wow.min.js"></script>
+<script src="lib/easing/easing.min.js"></script>
+<script src="lib/waypoints/waypoints.min.js"></script>
+<script src="lib/counterup/counterup.min.js"></script>
+<script src="lib/owlcarousel/owl.carousel.min.js"></script>
+<script src="lib/tempusdominus/js/moment.min.js"></script>
+<script src="lib/tempusdominus/js/moment-timezone.min.js"></script>
+<script src="lib/tempusdominus/js/tempusdominus-bootstrap-4.min.js"></script>
+
+<!-- Template Javascript -->
+<script src="js/main.js"></script>
+</body>
+</html>
